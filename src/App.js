@@ -8,6 +8,8 @@ export default class App extends React.Component {
     super();
     this.state = {
       notes: getInitialData(),
+      inputTitle: "",
+      inputBody: "",
     };
   }
 
@@ -18,6 +20,12 @@ export default class App extends React.Component {
         <NoteBodyContainer
           data={this.state.notes}
           formatDate={showFormattedDate}
+          setInputTitle={this.setState.inputTitle}
+          inputTitle={this.state.inputTitle}
+          setInputBody={this.setState.inputBody}
+          inputBody={this.state.inputBody}
+          setNotes={this.setState.notes}
+          notes={this.state.notes}
         />
       </React.Fragment>
     );
