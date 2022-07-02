@@ -1,4 +1,13 @@
-export default function NoteItem({ title, createdAt, body, archived }) {
+export default function NoteItem({
+  id,
+  title,
+  createdAt,
+  body,
+  archived,
+  onDeleteHandler,
+  onArchiveHandler,
+}) {
+  const button = archived ? "Pindahkan" : "Arsipkan";
   return (
     <div className="note-item">
       <div className="note-item__content">
@@ -7,12 +16,18 @@ export default function NoteItem({ title, createdAt, body, archived }) {
         <p className="note-item__body">{body}</p>
       </div>
       <div className="note-item__action">
-        <button className="note-item__delete-button">Delete</button>
-        {archived ? (
-          <button className="note-item__archive-button">Pindahkan</button>
-        ) : (
-          <button className="note-item__archive-button">Arsipkan</button>
-        )}
+        <button
+          className="note-item__delete-button"
+          onClick={() => onDeleteHandler(id)}
+        >
+          Delete
+        </button>
+        <button
+          className="note-item__archive-button"
+          onClick={() => onArchiveHandler(id)}
+        >
+          {button}
+        </button>
       </div>
     </div>
   );

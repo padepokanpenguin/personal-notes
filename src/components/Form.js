@@ -10,19 +10,19 @@ export default class Form extends React.Component {
     };
     this.onInputTitleHandler = this.onInputTitleHandler.bind(this);
     this.onInputBodyHandler = this.onInputBodyHandler.bind(this);
-    // this.onDecrementMaxLengthHandler =
-    // this.onDecrementMaxLengthHandler.bind(this);
     this.onSubmitNote = this.onSubmitNote.bind(this);
   }
 
   onInputTitleHandler(event) {
-    this.setState((prevState) => {
-      return {
-        ...prevState,
-        title: event.target.value,
-        maxLength: prevState.maxLength - 1,
-      };
-    });
+    if (this.state.title.length <= this.state.maxLength) {
+      this.setState((prevState) => {
+        return {
+          ...prevState,
+          title: event.target.value,
+          // maxLength: prevState.maxLength - 1,
+        };
+      });
+    }
   }
 
   onInputBodyHandler(event) {
@@ -30,15 +30,6 @@ export default class Form extends React.Component {
       return {
         ...prevState,
         body: event.target.value,
-      };
-    });
-    console.log(this.state.body);
-  }
-
-  onDecrementMaxLengthHandler() {
-    this.setState((prevState) => {
-      return {
-        maxLength: prevState - 1,
       };
     });
   }

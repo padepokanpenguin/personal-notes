@@ -1,6 +1,11 @@
 import NoteItem from "./NoteItem";
 
-export default function NotesList({ data, formatDate }) {
+export default function NotesList({
+  data,
+  formatDate,
+  onArchiveHandler,
+  onDeleteHandler,
+}) {
   return (
     <div className="notes-list">
       {data.map((note) => (
@@ -8,6 +13,8 @@ export default function NotesList({ data, formatDate }) {
           {...note}
           key={note.id}
           createdAt={formatDate(note.createdAt)}
+          onArchiveHandler={onArchiveHandler}
+          onDeleteHandler={onDeleteHandler}
         />
       ))}
     </div>
