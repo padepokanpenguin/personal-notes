@@ -9,6 +9,25 @@ export default class App extends React.Component {
     this.state = {
       notes: getInitialData(),
     };
+
+    this.addNotesHandler = this.addNotesHandler.bind(this);
+  }
+
+  addNotesHandler({ title, body }) {
+    this.setState((prevState) => {
+      return {
+        notes: [
+          ...prevState.notes,
+          {
+            id: +new Date(),
+            title,
+            body,
+            createdAt: new Date(),
+            archived: false,
+          },
+        ],
+      };
+    });
   }
 
   render() {
@@ -18,6 +37,7 @@ export default class App extends React.Component {
         <NoteBodyContainer
           data={this.state.notes}
           formatDate={showFormattedDate}
+          addNotes={this.addNotesHandler}
         />
       </React.Fragment>
     );

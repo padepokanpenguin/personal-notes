@@ -10,17 +10,19 @@ export default class Form extends React.Component {
     };
     this.onInputTitleHandler = this.onInputTitleHandler.bind(this);
     this.onInputBodyHandler = this.onInputBodyHandler.bind(this);
+    // this.onDecrementMaxLengthHandler =
+    // this.onDecrementMaxLengthHandler.bind(this);
+    this.onSubmitNote = this.onSubmitNote.bind(this);
   }
 
   onInputTitleHandler(event) {
     this.setState((prevState) => {
       return {
         ...prevState,
-        tile: event.target.value,
-        // maxLength: prevState - 1,
+        title: event.target.value,
+        maxLength: prevState.maxLength - 1,
       };
     });
-    console.log(this.state.title);
   }
 
   onInputBodyHandler(event) {
@@ -33,26 +35,32 @@ export default class Form extends React.Component {
     console.log(this.state.body);
   }
 
-  // onDecrementMaxLengthHandler() {
-  //   this.setState((prevState) => {
-  //     return {
-  //       maxLength: prevState - 1,
-  //     };
-  //   });
-  // }
+  onDecrementMaxLengthHandler() {
+    this.setState((prevState) => {
+      return {
+        maxLength: prevState - 1,
+      };
+    });
+  }
+
+  onSubmitNote(event) {
+    event.preventDefault();
+    this.props.addNotes(this.state);
+  }
 
   render() {
     return (
-      <form>
+      <form onSubmit={this.onSubmitNote}>
         <p className="note-input__title__char-limit ">
           Sisa karakter {this.state.maxLength}
         </p>
         <input
+          type="text"
           className="note-input__title"
-          placeholder="buat judul...."
-          // maxLength={this.state.maxLength}
+          placeholder="buat judul..."
           value={this.state.title}
           onChange={this.onInputTitleHandler}
+          maxLength={this.state.maxLength}
         />
         <textarea
           className="note-input__body"

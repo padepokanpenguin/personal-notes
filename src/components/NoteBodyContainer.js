@@ -2,12 +2,12 @@ import NoteInput from "./NoteInput";
 import NotesList from "./NotesList";
 import SectionTitle from "./SectionTitle";
 
-export default function NoteBodyContainer({ data, formatDate }) {
+export default function NoteBodyContainer({ data, formatDate, addNotes }) {
   const archived = data.filter((note) => note.archived === true);
   const notArchived = data.filter((note) => note.archived === false);
   return (
     <div className="note-app__body">
-      <NoteInput />
+      <NoteInput addNotes={addNotes} />
 
       <SectionTitle>Catatan Aktif</SectionTitle>
       {notArchived.length !== 0 ? (
